@@ -1,3 +1,14 @@
+"""
+Measure conversion API
+It converts:
+- Length units between the metric (cm) and imperial (inches) systems
+- Temperature units between Celsius, Fahrenheit and Kelvin
+- Currency between all currencies in the world
+- Academic grades between the Danish and American systems
+"""
+__author__ = "Arturo Mora-Rioja"
+__date__ = "September 2024"
+
 from flask import Blueprint, request, jsonify
 from api.classes.length import Length
 from api.classes.temperature import Temperature
