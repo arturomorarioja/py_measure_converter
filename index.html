@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Measure Converter</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/styles.css"></style>
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Measure Converter</h1>
+    </header>
+    <nav>
+        <ul>
+            <li id="menuLength">Length</li>
+            <li id="menuTemperature">Temperature</li>
+            <li id="menuCurrency">Currency</li>
+            <li id="menuGrading">Grading</li>
+        </ul>
+    </nav>
+    <main>
+        <section id="sectionLength">
+            <form>
+                <div>
+                    <label for="txtLength">Length</label>
+                    <input type="text" id="txtLength" name="txtLength" class="numeric" value="0" pattern="[0-9]+[.]?[0-9]?[0-9]?" required>
+                </div>
+                <div>
+                    <label class="standalone">System</label>
+                    <input type="radio" id="radMetric" name="radLengthSystem" value="M" checked>
+                    <label for="radMetric">Metric</label>
+                    <input type="radio" id="radImperial" name="radLengthSystem" value="I">
+                    <label for="radImperial">Imperial</label>
+                </div>
+                <div>
+                    <input type="submit" value="Convert">
+                </div>
+            </form>
+            <div></div>
+        </section>
+        <section id="sectionTemperature">
+            <form>
+                <div>
+                    <label for="txtTemperature">Temperature</label>
+                    <input type="text" id="txtTemperature" name="txtTemperature" class="numeric" value="0" pattern="[-]?[0-9]+[.]?[0-9]?[0-9]?" required>
+                </div>
+                <div>
+                    <div id="fromScale">
+                        <label for="lstFrom">From</label><br>
+                        <select id="lstFrom" size="3">
+                            <option value="C" selected>Celsius</option>
+                            <option value="F">Fahrenheit</option>
+                            <option value="K">Kelvin</option>
+                        </select>
+                    </div>
+                    <div id="toScale">
+                        <label for="lstTo">To</label><br>
+                        <select id="lstTo" size="3">
+                            <option value="C">Celsius</option>
+                            <option value="F" selected>Fahrenheit</option>
+                            <option value="K">Kelvin</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <input type="submit" value="Convert">
+                </div>
+            </form>
+            <div></div>
+        </section>
+        <section id="sectionCurrency">
+            <form>
+                <div>
+                    <label for="txtCurrency">Amount</label>
+                    <input type="text" id="txtCurrency" name="txtCurrency" class="numeric" value="0" pattern="[0-9]+[.]?[0-9]?[0-9]?" required>
+                </div>
+                <div>
+                    <div id="fromCurrency">
+                        <label for="cmbFrom">From</label>
+                        <select id="cmbFrom" size="1">
+                        </select>
+                    </div>
+                    <div id="toCurrency">
+                        <label for="cmbTo">To</label>
+                        <select id="cmbTo" size="1">
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <input type="submit" value="Convert">
+                </div>
+            </form>
+            <div></div>
+        </section>
+        <section id="sectionGrading">
+            <form>
+                <div>
+                    <label class="standalone">Country</label>
+                    <input type="radio" id="radDenmark" name="radGradingSystem" value="Denmark" checked>
+                    <label for="radDenmark">Denmark</label>
+                    <input type="radio" id="radUSA" name="radGradingSystem" value="USA">
+                    <label for="radUSA">USA</label>
+                </div>
+                <div>
+                    <label for="cmbGrade">Grade</label>
+                    <select id="cmbGrade" size="1">
+                    </select>
+                </div>
+                <div>
+                    <input type="submit" value="Convert">
+                </div>
+            </form>
+            <div></div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Arturo Mora-Rioja</p>
+    </footer>
+</body>
+</html>
