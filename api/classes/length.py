@@ -13,7 +13,7 @@ class Length(LengthConstants):
         self.measure = float(measure)
         self.system = system
 
-    def convert(self):
+    def convert(self) -> float:
         if self.system == self.METRIC:
             return round(self.measure / self.CONVERSION_FACTOR, 2)
         else:
