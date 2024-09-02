@@ -1,5 +1,4 @@
-'use strict';
-const API_URL = 'api/index.js';
+import { baseAPIUrl } from './info.js';
 
 //  Navigation menu
 
@@ -27,7 +26,7 @@ document.querySelector('#sectionLength > form').addEventListener('submit', funct
     const measure = e.target.txtLength.val;
     const system = document.querySelector('[name="radLengthSystem"]:checked').val;
     
-    fetch(API_URL, {
+    fetch(baseAPIUrl, {
         method: 'POST',
         data: {
             'conversion': 'length',
@@ -51,7 +50,7 @@ document.querySelector('#sectionTemperature > form').addEventListener('submit', 
     const from = e.target.lstFrom.val;
     const to = e.target.lstTo.val;
 
-    fetch(API_URL, {
+    fetch(baseAPIUrl, {
         method: 'POST',
         data: {
             'conversion': 'temperature',
@@ -70,7 +69,7 @@ document.querySelector('#sectionTemperature > form').addEventListener('submit', 
 
 //  Currency
 
-fetch(API_URL, {
+fetch(baseAPIUrl, {
     method: 'POST',
     data: {
         'conversion': 'currency',
@@ -98,7 +97,7 @@ document.querySelector('#sectionCurrency > form').addEventListener('submit', fun
     const from = e.target.cmbFrom.val;
     const to = e.target.cmbTo.val;
 
-    fetch(API_URL, {
+    fetch(baseAPIUrl, {
         method: 'POST',
         data: {
             'conversion': 'currency',
@@ -148,7 +147,7 @@ document.querySelector('#sectionGrading > form').addEventListener('submit', func
     const measure = e.target.cmbGrade.val;
     const country = document.querySelector('[name="radGradingSystem"]:checked').val;
 
-    fetch(API_URL, {
+    fetch(baseAPIUrl, {
         method: 'POST',
         data: {
             'conversion': 'grading',
