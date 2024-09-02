@@ -10,11 +10,9 @@ bp = Blueprint('converter', __name__)
 def get_length():
     measure = request.args.get('measure')
     system = request.args.get('system')
-
-    if not measure.isnumeric():
-        return error_message(), 400
     
     try:
+        measure = float(measure)
         length = Length(measure, system)
         return jsonify(result=str(length.convert())), 200
     except Exception:
