@@ -14,7 +14,6 @@ menuOptions.forEach(menuOption => {
     
         const currentSection = document.querySelector('#section' + this.id.substring(4));
         currentSection.classList.add('visible');
-        console.log(currentSection);
         currentSection.querySelector('input[type="text"]').focus();
     });
 });    
@@ -26,14 +25,7 @@ document.querySelector('#sectionLength > form').addEventListener('submit', funct
     const measure = e.target.txtLength.val;
     const system = document.querySelector('[name="radLengthSystem"]:checked').val;
     
-    fetch(baseAPIUrl, {
-        method: 'POST',
-        data: {
-            'conversion': 'length',
-            'measure': measure,
-            'system': system
-        }
-    })
+    fetch(`${baseAPIUrl}/length?measure=${measure}&system=${system}`)
     .then(response => response.json())
     .then((data) => {
         const text = measure + (system === 'M' ? ' centimeters' : ' inches') + ' is ' + data + (system === 'M' ? ' inches' : ' centimeters');
@@ -50,15 +42,7 @@ document.querySelector('#sectionTemperature > form').addEventListener('submit', 
     const from = e.target.lstFrom.val;
     const to = e.target.lstTo.val;
 
-    fetch(baseAPIUrl, {
-        method: 'POST',
-        data: {
-            'conversion': 'temperature',
-            'measure': measure,
-            'originScale': from,
-            'destinationScale': to
-        }
-    })
+    fetch(`${baseAPIUrl}/temperature?measure=${measure}&origin-scale=${from}&destination-scale=${to}`)
     .then(response => response.json())
     .then((data) => {
         const text = `${measure} &deg;${from} is ${data} &deg;${to}`;
@@ -69,13 +53,7 @@ document.querySelector('#sectionTemperature > form').addEventListener('submit', 
 
 //  Currency
 
-fetch(baseAPIUrl, {
-    method: 'POST',
-    data: {
-        'conversion': 'currency',
-        'action': 'getCurrencyList'
-    }
-})
+fetch(`${baseAPIUrl}/currency`)
 .then(response => response.json())
 .then((data) => {
     let currencyOptions = '';
@@ -97,16 +75,7 @@ document.querySelector('#sectionCurrency > form').addEventListener('submit', fun
     const from = e.target.cmbFrom.val;
     const to = e.target.cmbTo.val;
 
-    fetch(baseAPIUrl, {
-        method: 'POST',
-        data: {
-            'conversion': 'currency',
-            'action': 'convert',
-            'measure': measure,
-            'baseCurrency': from,
-            'destinationCurrency': to
-        }    
-    })
+    fetch(`${baseAPIUrl}/currency?measure=${measure}&base-currency=${from}&destination-currency=${to}`)
     .then(response = response.json())
     .then((data) => {
         const text = `${measure} ${from} is ${data} ${to}`;
@@ -147,14 +116,7 @@ document.querySelector('#sectionGrading > form').addEventListener('submit', func
     const measure = e.target.cmbGrade.val;
     const country = document.querySelector('[name="radGradingSystem"]:checked').val;
 
-    fetch(baseAPIUrl, {
-        method: 'POST',
-        data: {
-            'conversion': 'grading',
-            'measure': measure,
-            'country': country
-        }
-    })
+    fetch(`${baseAPIUrl}/grading?measure=${measure}&country=${country}`)
     .then(response => response.json())
     .then((data) => {
         let text = `${measure} in ${country} is ${data} in `;
