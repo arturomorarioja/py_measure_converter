@@ -44,22 +44,27 @@ document.querySelector('#sectionLength > form').addEventListener('submit', (e) =
     .catch(handleError);
 });
 
-// //  Temperature
+/**
+ * Temperature conversion
+ */
+document.querySelector('#sectionTemperature > form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const measure = e.target.txtTemperature.value;
+    const from = e.target.lstFrom.value;
+    const to = e.target.lstTo.value;
 
-// document.querySelector('#sectionTemperature > form').addEventListener('submit', function(e) {
-//     e.preventDefault();
-//     const measure = e.target.txtTemperature.value;
-//     const from = e.target.lstFrom.value;
-//     const to = e.target.lstTo.value;
-
-//     fetch(`${baseAPIUrl}/temperature?measure=${measure}&origin-scale=${from}&destination-scale=${to}`)
-//     .then(response => response.json())
-//     .then((data) => {
-//         const text = `${measure} &deg;${from} is ${data} &deg;${to}`;
-
-//         document.querySelector('#sectionTemperature > div').innerHTML = text;
-//     });
-// });
+    fetch(`${baseAPIUrl}/temperature?measure=${measure}&origin-scale=${from}&destination-scale=${to}`)
+    .then(response => response.json())
+    .then((data) => {
+        let text;
+        if (data.error !== undefined) {
+            text = 'Error in conversion: ' + data.error;
+        } else {
+            text = `${measure} &deg;${from} is ${data.result} &deg;${to}`;
+        }
+        document.querySelector('#sectionTemperature > div').innerHTML = text;
+    });
+});
 
 // //  Currency
 
