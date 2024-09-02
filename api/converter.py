@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from api.classes.length import Length
+from api.classes.temperature import Temperature
 
 def error_message():
     return jsonify(error='Invalid parameters')
@@ -18,3 +19,15 @@ def get_length():
     except Exception:
         return error_message(), 400
     
+@bp.route('/temperature', methods=['GET'])
+def get_temperature():
+    measure = request.args.get('measure')
+    origin_system = request.args.get('origin-scale')
+    destination_system = request.args.get('destination-scale')
+
+    try:
+        measure = float(measure)
+        temperature = Temperature(measure, origin_system)
+        return jsonify(result=str(temperature.convert(destination_system))), 200
+    except Exception:
+        return error_message(), 400
