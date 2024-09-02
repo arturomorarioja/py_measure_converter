@@ -21,6 +21,8 @@ class Temperature(TemperatureConstants):
             raise ValueError('Unsupported destination measure system')
         conversion = self.system + destination_system
 
+        if conversion[0] == conversion[1]:
+            return self.measure
         if conversion == self.CELSIUS + self.FAHRENHEIT:
             return round((self.measure * 1.8) + 32, 2)
         elif conversion == self.CELSIUS + self.KELVIN:
