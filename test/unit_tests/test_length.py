@@ -2,7 +2,6 @@ import pytest
 import sys
 from api.classes.length import Length
 
-
 class TestLength():
 
     # Positive tests
