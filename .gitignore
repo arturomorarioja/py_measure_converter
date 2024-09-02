@@ -1,3 +1,4 @@
+.pytest_cache
 api/__pycache__
 api/classes/__pycache__
 test/__pycache__
