@@ -24,6 +24,11 @@ class apiKey {
 
 2. The script `db/converter.sql` for the MariaDB/MySQL database `converter` must be installed.
 
+3. The API must be run
+```
+pip install -r requirements.txt
+```
+
 ## Unit tests
 
 The unit tests for the PHP code are managed by PHPUnit. They lie under `tests\unitTests` and can be run with the command `composer test`:
@@ -44,8 +49,8 @@ The end-to-end tests are managed by Cypress. They are in `cypress\e2e\tests.cy.j
 
 ## Tools
 Database: MariaDB
-Programming: Node.js / JavaScript / CSS3 / HTML5
-Testing: Jest / GitHub Actions / Cypress
+Programming: Flask / Python / JavaScript / CSS3 / HTML5
+Testing: Pytest / GitHub Actions / Cypress
 
 ## Author
 Arturo Mora-Rioja (amri@kea.dk)

@@ -10,7 +10,7 @@ class Length(LengthConstants):
     def __init__(self, measure: float, system: str):
         if not system in (self.IMPERIAL, self.METRIC):
             raise ValueError('Unsupported measure system')
-        self.measure = float(measure)
+        self.measure = abs(float(measure))
         self.system = system
 
     def convert(self) -> float:
