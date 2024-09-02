@@ -18,27 +18,30 @@ menuOptions.forEach(menuOption => {
     });
 });    
 
-//  Length
+const handleError = () => { 
+    document.querySelector('#sectionLength > div').innerText = 'Error in conversion'; 
+}
 
-document.querySelector('#sectionLength > form').addEventListener('submit', function(e) {
+/**
+ * Length conversion
+ */
+document.querySelector('#sectionLength > form').addEventListener('submit', (e) => {
     e.preventDefault();
     const measure = e.target.txtLength.value;
     const system = document.querySelector('[name="radLengthSystem"]:checked').value;
-    
-    console.log(`${baseAPIUrl}/length?measure=${measure}&system=${system}`);
-    fetch(`${baseAPIUrl}/length?measure=${measure}&system=${system}`, {
-        mode: 'cors',
-        headers: {
-            'Access-Control-Allow-Origin': '*'
-        }
-    })
+
+    fetch(`${baseAPIUrl}/length?measure=${measure}&system=${system}`)
     .then(response => response.json())
     .then((data) => {
-        console.log(data);
-        const text = measure + (system === 'M' ? ' centimeters' : ' inches') + ' is ' + data.result + (system === 'M' ? ' inches' : ' centimeters');
-
+        let text;
+        if (data.error !== undefined) {
+            text = 'Error in conversion: ' + data.error;
+        } else {
+            text = measure + (system === 'M' ? ' centimeters' : ' inches') + ' is ' + data.result + (system === 'M' ? ' inches' : ' centimeters');
+        }
         document.querySelector('#sectionLength > div').innerText = text;
-    });
+    })
+    .catch(handleError);
 });
 
 // //  Temperature
