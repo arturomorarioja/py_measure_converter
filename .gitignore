@@ -4,3 +4,4 @@ api/classes/__pycache__
 test/__pycache__
 test/unit_tests/__pycache__
 venv
+.env
