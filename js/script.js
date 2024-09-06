@@ -14,7 +14,10 @@ menuOptions.forEach(menuOption => {
     
         const currentSection = document.querySelector('#section' + this.id.substring(4));
         currentSection.classList.add('visible');
-        currentSection.querySelector('input[type="text"]').focus();
+        const currentInput = currentSection.querySelector('input[type="text"]');
+        if (currentInput !== null) {
+            currentInput.focus()
+        };
     });
 });    
 
@@ -99,47 +102,50 @@ document.querySelector('#sectionTemperature > form').addEventListener('submit', 
 //     });
 // });
 
-// //  Grading population
+//  Grading population
 
-// document.querySelector('[name="radGradingSystem"]').addEventListener('change', () => {
-//     if (document.querySelector('[name="radGradingSystem"]:checked').value === 'Denmark') {
-//         document.querySelector('#cmbGrade').innerHTML = `
-//             <option value="12" selected>12</option>
-//             <option value="10">10</option>
-//             <option value="7">7</option>
-//             <option value="4">4</option>
-//             <option value="02">02</option>
-//             <option value="00">00</option>
-//             <option value="-3">-3</option>
-//         `;
-//     } else {
-//         document.querySelector('#cmbGrade').innerHTML = `
-//             <option value="A+" selected>A+</option>
-//             <option value="A">A</option>
-//             <option value="B">B</option>
-//             <option value="C">C</option>
-//             <option value="D">D</option>
-//             <option value="F">F</option>
-//         `;
-//     }
-// });
+document.querySelectorAll('[name="radGradingSystem"]').forEach((radio) => {
+    
+    radio.addEventListener('change', () => {
+        if (document.querySelector('[name="radGradingSystem"]:checked').value === 'Denmark') {
+            document.querySelector('#cmbGrade').innerHTML = `
+            <option value="12" selected>12</option>
+            <option value="10">10</option>
+            <option value="7">7</option>
+            <option value="4">4</option>
+            <option value="02">02</option>
+            <option value="00">00</option>
+            <option value="-3">-3</option>
+            `;
+        } else {
+            document.querySelector('#cmbGrade').innerHTML = `
+            <option value="A+" selected>A+</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="F">F</option>
+            `;
+        }
+    });
+});
 
-// //  Grading
+//  Grading
 
-// document.querySelector('#sectionGrading > form').addEventListener('submit', function(e) {
-//     e.preventDefault();
-//     const measure = e.target.cmbGrade.value;
-//     const country = document.querySelector('[name="radGradingSystem"]:checked').value;
+document.querySelector('#sectionGrading > form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const measure = e.target.cmbGrade.value;
+    const country = document.querySelector('[name="radGradingSystem"]:checked').value;
 
-//     fetch(`${baseAPIUrl}/grading?measure=${measure}&country=${country}`)
-//     .then(response => response.json())
-//     .then((data) => {
-//         let text = `${measure} in ${country} is ${data} in `;
-//         text += (country === 'Denmark' ? 'USA' : 'Denmark');
+    fetch(`${baseAPIUrl}/grading?measure=${measure}&country=${country}`)
+    .then(response => response.json())
+    .then((data) => {
+        let text = `${measure} in ${country} is ${data.result} in `;
+        text += (country === 'Denmark' ? 'USA' : 'Denmark');
 
-//         document.querySelector('#sectionGrading > div').innerText = text;
-//     });
-// });
+        document.querySelector('#sectionGrading > div').innerText = text;
+    });
+});
 
 document.querySelector('nav > ul > li#menuLength').click();
 document.querySelector('[name="radGradingSystem"]').dispatchEvent(new Event('change'));

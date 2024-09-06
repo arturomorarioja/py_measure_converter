@@ -12,6 +12,7 @@ __date__ = "September 2024"
 from flask import Blueprint, request, jsonify
 from api.classes.length import Length
 from api.classes.temperature import Temperature
+from api.classes.grading import Grading
 
 def error_message():
     return jsonify(error='Invalid parameters')
@@ -40,5 +41,16 @@ def get_temperature():
         measure = float(measure)
         temperature = Temperature(measure, origin_system)
         return jsonify(result=str(temperature.convert(destination_system))), 200
+    except Exception:
+        return error_message(), 400
+    
+@bp.route('/grading', methods=['GET'])
+def get_grade():
+    measure = request.args.get('measure')
+    country = request.args.get('country')
+
+    try:
+        grading = Grading()
+        return jsonify(result=grading.convert(measure, country)), 200
     except Exception:
         return error_message(), 400
