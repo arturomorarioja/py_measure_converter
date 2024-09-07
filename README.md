@@ -12,21 +12,24 @@ It allows conversions between the following measure systems:
 
 ## Installation
 
-1. A file `info/info.php` must be created with the following content:
+1. A file `.env` must be created in the root directory with the following content:
 
-```php
-<?php
-
-class apiKey {
-    public const CURRENCY_API_KEY = '<API key provided by https://currencyapi.com/>';
-}
+```python
+ENVIRONMENT='Development'
+FLASK_HOST=<your_mysql_server_by_default_localhost>
+FLASK_USER=<your_mysql_user_by_default_root>
+FLASK_PASSWORD=<your_mysql_password_by_default_empty_string>
+FLASK_DATABASE='converter'
 ```
 
 2. The script `db/converter.sql` for the MariaDB/MySQL database `converter` must be installed.
 
-3. The API must be run
+3. The API must be run. In Windows:
 ```
-pip install -r requirements.txt
+> python -m venv venv
+> .\venv\Scripts\activate
+> pip install -r requirements.txt
+> python -m flask --app api run --port 8000 --debug
 ```
 
 ## Unit tests
@@ -53,4 +56,4 @@ Programming: Flask / Python / JavaScript / CSS3 / HTML5
 Testing: Pytest / GitHub Actions / Cypress
 
 ## Author
-Arturo Mora-Rioja (amri@kea.dk)
+Arturo Mora-Rioja

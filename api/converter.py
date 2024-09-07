@@ -13,6 +13,7 @@ from flask import Blueprint, request, jsonify
 from api.classes.length import Length
 from api.classes.temperature import Temperature
 from api.classes.grading import Grading
+from api.classes.currency import Currency
 
 def error_message():
     return jsonify(error='Invalid parameters')
@@ -52,5 +53,20 @@ def get_grade():
     try:
         grading = Grading()
         return jsonify(result=grading.convert(measure, country)), 200
+    except Exception:
+        return error_message(), 400
+    
+@bp.route('/currency', methods=['GET'])
+def get_currency():
+    amount = request.args.get('measure')
+    origin_currency = request.args.get('base-currency')
+    destination_currency = request.args.get('destination-currency')
+
+    try:
+        currency = Currency()
+        if amount == None:
+            return currency.get_all(), 200
+        else:
+            return jsonify(result=currency.convert(amount, origin_currency, destination_currency)), 200
     except Exception:
         return error_message(), 400

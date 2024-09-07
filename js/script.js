@@ -69,38 +69,39 @@ document.querySelector('#sectionTemperature > form').addEventListener('submit', 
     });
 });
 
-// //  Currency
+//  Currency
 
-// fetch(`${baseAPIUrl}/currency`)
-// .then(response => response.json())
-// .then((data) => {
-//     let currencyOptions = '';
-//     for (const [key, value] of Object.entries(data)) {
-//         currencyOptions += `
-//             <option value="${value[0]}">${value[0]} - ${value[1]}</option>
-//         `;
-//     }
-//     document.querySelector('#cmbFrom').innerHTML = currencyOptions;
-//     document.querySelector('#cmbTo').innerHTML = currencyOptions;
-//     // Default values
-//     document.querySelector('#cmbFrom > option[value="DKK"]').selected = true;
-//     document.querySelector('#cmbTo > option[value="EUR"]').selected = true;
-// });
+fetch(`${baseAPIUrl}/currency`)
+.then(response => response.json())
+.then((data) => {
+    console.log(data);
+    let currencyOptions = '';
+    for (const [key, value] of Object.entries(data.data)) {
+        currencyOptions += `
+            <option value="${value.code}">${value.code} - ${value.name}</option>
+        `;
+    }
+    document.querySelector('#cmbFrom').innerHTML = currencyOptions;
+    document.querySelector('#cmbTo').innerHTML = currencyOptions;
+    // Default values
+    document.querySelector('#cmbFrom > option[value="DKK"]').selected = true;
+    document.querySelector('#cmbTo > option[value="EUR"]').selected = true;
+});
+    
+document.querySelector('#sectionCurrency > form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const measure = e.target.txtCurrency.value;
+    const from = e.target.cmbFrom.value;
+    const to = e.target.cmbTo.value;
 
-// document.querySelector('#sectionCurrency > form').addEventListener('submit', function(e) {
-//     e.preventDefault();
-//     const measure = e.target.txtCurrency.value;
-//     const from = e.target.cmbFrom.value;
-//     const to = e.target.cmbTo.value;
+    fetch(`${baseAPIUrl}/currency?measure=${measure}&base-currency=${from}&destination-currency=${to}`)
+    .then(response = response.json())
+    .then((data) => {
+        const text = `${measure} ${from} is ${data.result} ${to}`;
 
-//     fetch(`${baseAPIUrl}/currency?measure=${measure}&base-currency=${from}&destination-currency=${to}`)
-//     .then(response = response.json())
-//     .then((data) => {
-//         const text = `${measure} ${from} is ${data} ${to}`;
-
-//         document.querySelector('#sectionCurrency > div').innerText = text;
-//     });
-// });
+        document.querySelector('#sectionCurrency > div').innerText = text;
+    });
+});
 
 //  Grading population
 
