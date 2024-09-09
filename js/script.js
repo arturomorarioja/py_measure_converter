@@ -72,20 +72,27 @@ document.querySelector('#sectionTemperature > form').addEventListener('submit', 
 //  Currency
 
 fetch(`${baseAPIUrl}/currency`)
-.then(response => response.json())
-.then((data) => {
-    console.log(data);
-    let currencyOptions = '';
-    for (const [key, value] of Object.entries(data.data)) {
-        currencyOptions += `
-            <option value="${value.code}">${value.code} - ${value.name}</option>
-        `;
+.then(response => {
+    if (response.ok) {
+        return response.json()
+    } else {
+        document.querySelector('#sectionCurrency > div').innerText = 'There was an error while retrieving the list of currencies';    
     }
-    document.querySelector('#cmbFrom').innerHTML = currencyOptions;
-    document.querySelector('#cmbTo').innerHTML = currencyOptions;
-    // Default values
-    document.querySelector('#cmbFrom > option[value="DKK"]').selected = true;
-    document.querySelector('#cmbTo > option[value="EUR"]').selected = true;
+})
+.then((data) => {
+    if (data !== undefined) {
+        let currencyOptions = '';
+        for (const [key, value] of Object.entries(data.data)) {
+            currencyOptions += `
+            <option value="${value.code}">${value.code} - ${value.name}</option>
+            `;
+        }
+        document.querySelector('#cmbFrom').innerHTML = currencyOptions;
+        document.querySelector('#cmbTo').innerHTML = currencyOptions;
+        // Default values
+        document.querySelector('#cmbFrom > option[value="DKK"]').selected = true;
+        document.querySelector('#cmbTo > option[value="EUR"]').selected = true;
+    }
 });
     
 document.querySelector('#sectionCurrency > form').addEventListener('submit', function(e) {
@@ -95,7 +102,13 @@ document.querySelector('#sectionCurrency > form').addEventListener('submit', fun
     const to = e.target.cmbTo.value;
 
     fetch(`${baseAPIUrl}/currency?measure=${measure}&base-currency=${from}&destination-currency=${to}`)
-    .then(response = response.json())
+    .then(response => {
+        if (response.ok) {
+            return response.json()
+        } else {
+            document.querySelector('#sectionCurrency > div').innerText = 'There was an error while converting the currencies';    
+        }
+    })
     .then((data) => {
         const text = `${measure} ${from} is ${data.result} ${to}`;
 

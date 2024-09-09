@@ -69,4 +69,4 @@ def get_currency():
         else:
             return jsonify(result=currency.convert(amount, origin_currency, destination_currency)), 200
     except Exception:
-        return error_message(), 400
+        return jsonify(error='It was not possible to connect with the Currency API'), 400
