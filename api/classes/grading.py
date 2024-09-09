@@ -10,6 +10,9 @@ class GradingConstants:
 class Grading(GradingConstants):
 
     def convert(self, grade: str, system: str) -> str: 
+        if not system in (self.DENMARK, self.USA):
+            raise ValueError('Unsupported grading system')
+
         with connect(
             host=current_app.config['HOST'],
             user=current_app.config['USER'],
@@ -25,7 +28,11 @@ class Grading(GradingConstants):
                 '''
                 try:
                     cursor.execute(sql, (grade,))
-                    return cursor.fetchall()[0][0]
-                except Exception as e:
+                    result = cursor.fetchall()
+                except Error as e:
                     print('--- ERROR ---')
-                    print(e)
+                    print(e.msg)
+                    
+                if result == []:
+                    raise ValueError('Grade not found')
+                return result[0][0]

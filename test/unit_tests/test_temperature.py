@@ -1,5 +1,4 @@
 import pytest
-import sys
 from api.classes.temperature import Temperature
 
 class TestTemperature():

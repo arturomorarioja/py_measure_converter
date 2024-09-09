@@ -139,12 +139,20 @@ document.querySelector('#sectionGrading > form').addEventListener('submit', func
     const country = document.querySelector('[name="radGradingSystem"]:checked').value;
 
     fetch(`${baseAPIUrl}/grading?measure=${measure}&country=${country}`)
-    .then(response => response.json())
+    .then(response => {
+        if (response.ok) {
+            return response.json()
+        } else {
+            document.querySelector('#sectionGrading > div').innerText = 'There was an error while connecting to the database';    
+        }
+    })
     .then((data) => {
-        let text = `${measure} in ${country} is ${data.result} in `;
-        text += (country === 'Denmark' ? 'USA' : 'Denmark');
-
-        document.querySelector('#sectionGrading > div').innerText = text;
+        if (data !== undefined) {
+            let text = `${measure} in ${country} is ${data.result} in `;
+            text += (country === 'Denmark' ? 'USA' : 'Denmark');
+            
+            document.querySelector('#sectionGrading > div').innerText = text;
+        }
     });
 });
 
