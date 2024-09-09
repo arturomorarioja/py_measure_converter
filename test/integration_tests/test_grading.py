@@ -8,6 +8,10 @@ def get_app_context():
     with app.app_context():
         yield
 
+@pytest.fixture(scope='function')
+def grading_fixture():
+    return Grading()
+
 class TestGrading():
 
     # Positive tests
@@ -26,27 +30,18 @@ class TestGrading():
         ('D', Grading.USA, '02'),
         ('F', Grading.USA, '00')
     ])
-    def test_convert_passes(self, grade, system, expected):
+    def test_convert_passes(self, grading_fixture, grade, system, expected):
         app = create_app()
-        grading = Grading()
         with app.app_context():
-            assert grading.convert(grade, system) == expected
+            assert grading_fixture.convert(grade, system) == expected
         
     # Negative tests
     @pytest.mark.parametrize('grade, system', [
         ('A', 'Spain'),
-        ('10', 'Spain')
-    ])
-    def test_convert_raises_exception(self, grade, system):
-        grading = Grading()
-        with pytest.raises(ValueError):
-            grading.convert(grade, system)
-
-    @pytest.mark.parametrize('grade, system', [
+        ('10', 'Spain'),
         ('K', Grading.DENMARK),
         ('K', Grading.USA)
     ])
-    def test_convert_raises_exception(self, grade, system):
-        grading = Grading()
+    def test_convert_raises_exception(self, grading_fixture, grade, system):
         with pytest.raises(ValueError):
-            grading.convert(grade, system)
+            grading_fixture.convert(grade, system)
