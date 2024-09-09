@@ -21,7 +21,7 @@ class Currency():
             print(e)
             return {'error': e.msg}
 
-    def convert(self, amount: float, base_currency: str, destination_currency: str) -> float:
+    def convert(self, amount: float, base_currency: str='DKK', destination_currency: str='EUR') -> float:
         url = f'{os.getenv("BASE_API_URL")}/latest?apikey={os.getenv("CURRENCY_API_KEY")}&base_currency={base_currency}'
         try:            
             response = requests.get(url)
@@ -31,8 +31,8 @@ class Currency():
         except HTTPError as http_err:
             print('--- ERROR ---')
             print(http_err)
-            return {'error': http_err.msg}
+            return {'error': http_err}
         except Exception as e:
             print('--- ERROR ---')
             print(e)
-            return {'error': e.msg}
+            return {'error': e}
