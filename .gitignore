@@ -1,3 +1,4 @@
+.vscode
 .pytest_cache
 api/__pycache__
 api/classes/__pycache__
