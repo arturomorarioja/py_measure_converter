@@ -15,6 +15,10 @@ class Length(LengthConstants):
 
     def convert(self) -> float:
         if self.system == self.METRIC:
-            return round(self.measure / self.CONVERSION_FACTOR, 2)
+            ret = round(self.measure / self.CONVERSION_FACTOR, 2)
         else:
-            return round(self.measure * self.CONVERSION_FACTOR, 2)
+            ret = round(self.measure * self.CONVERSION_FACTOR, 2)
+        # This way 1500.0 returns as 1500
+        if ret == int(ret):
+            ret = int(ret)
+        return ret

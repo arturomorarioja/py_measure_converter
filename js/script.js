@@ -148,7 +148,7 @@ document.querySelectorAll('[name="radGradingSystem"]').forEach((radio) => {
 
 document.querySelector('#sectionGrading > form').addEventListener('submit', function(e) {
     e.preventDefault();
-//// URLEncode this    
+    
     const measure = e.target.cmbGrade.value;
     const country = document.querySelector('[name="radGradingSystem"]:checked').value;
 

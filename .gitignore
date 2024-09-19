@@ -2,6 +2,10 @@
 .pytest_cache
 api/__pycache__
 api/classes/__pycache__
+cypress/downloads
+cypress/fixtures
+cypress/support
+node_modules
 test/__pycache__
 test/integration_tests/__pycache__
 test/unit_tests/__pycache__

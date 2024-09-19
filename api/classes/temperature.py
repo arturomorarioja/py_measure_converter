@@ -22,18 +22,23 @@ class Temperature(TemperatureConstants):
         conversion = self.system + destination_system
 
         if conversion[0] == conversion[1]:
-            return self.measure
-        if conversion == self.CELSIUS + self.FAHRENHEIT:
-            return round((self.measure * 1.8) + 32, 2)
+            ret = self.measure
+        elif conversion == self.CELSIUS + self.FAHRENHEIT:
+            ret = round((self.measure * 1.8) + 32, 2)
         elif conversion == self.CELSIUS + self.KELVIN:
-            return round(self.measure + 273.15, 2)
+            ret = round(self.measure + 273.15, 2)
         elif conversion == self.FAHRENHEIT + self.CELSIUS:
-            return round((self.measure - 32) / 1.8, 2)
+            ret = round((self.measure - 32) / 1.8, 2)
         elif conversion == self.FAHRENHEIT + self.KELVIN:
-            return round((self.measure + 459.67) * (5 / 9), 2)
+            ret = round((self.measure + 459.67) * (5 / 9), 2)
         elif conversion == self.KELVIN + self.CELSIUS:
-            return round(self.measure - 273.15, 2)
+            ret = round(self.measure - 273.15, 2)
         elif conversion == self.KELVIN + self.FAHRENHEIT:
-            return round((self.measure * (5 / 9)) - 459.67, 2)
+            ret = round((self.measure * (5 / 9)) - 459.67, 2)
         else:
-            return None
+            ret = None
+        
+        # This way 30.0 returns as 30
+        if ret == int(ret):
+            ret = int(ret)
+        return ret
