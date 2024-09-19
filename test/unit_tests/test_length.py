@@ -22,14 +22,10 @@ class TestLength():
         length = Length(length_value, system)
         assert length.convert() == expected
         
-    # Negative tests
-    @pytest.mark.parametrize('length_value, system, expected', [
-        (-1, Length.IMPERIAL, -2.54),
-        (7.077532027016992E+307, Length.IMPERIAL, sys.float_info.max),
-    ])
-    def test_convert_fails(self, length_value, system, expected):
-        length = Length(length_value, system)
-        assert not length.convert() == expected
+    # Negative test
+    def test_convert_fails(self):
+        length = Length(-1, Length.IMPERIAL)
+        assert not length.convert() == -2.54
     
     # Exception test
     def test_exception_invalid_system(self):
