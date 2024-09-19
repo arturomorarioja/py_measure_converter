@@ -148,10 +148,11 @@ document.querySelectorAll('[name="radGradingSystem"]').forEach((radio) => {
 
 document.querySelector('#sectionGrading > form').addEventListener('submit', function(e) {
     e.preventDefault();
+//// URLEncode this    
     const measure = e.target.cmbGrade.value;
     const country = document.querySelector('[name="radGradingSystem"]:checked').value;
 
-    fetch(`${baseAPIUrl}/grading?measure=${measure}&country=${country}`)
+    fetch(`${baseAPIUrl}/grading?measure=${encodeURIComponent(measure)}&country=${country}`)
     .then(response => {
         if (response.ok) {
             return response.json()
