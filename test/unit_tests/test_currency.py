@@ -7,7 +7,7 @@ def currency_fixture(mocker):
     mocker.patch.object(currency, 'convert', return_value=1000)
     return currency
 
-class TestGrading():
+class TestCurrency():
     
     def test_convert_returns_float(self, currency_fixture):
         assert currency_fixture.convert(1000) == 1000
