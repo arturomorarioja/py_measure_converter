@@ -9,7 +9,6 @@ It allows conversions between the following measure systems:
 - Currency: between all currencies at https://currencyapi.com/
 - Academic grades: between the Danish and American systems
 
-
 ## Installation
 
 1. A file `.env` must be created in the root directory with the following content:
