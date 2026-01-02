@@ -39,6 +39,8 @@ If the API runs in a different port, make sure to update its base URL in `js\inf
 npm i
 ```
 
+5. The application must be run at `http://127.0.0.1:5500` (localhost at VSCode's default port)
+
 ## Unit tests
 
 The unit tests for the Python code are managed by Pytest. They lie under `test\unit_tests` and can be run with the command `pytest test\unit_tests`:
@@ -55,7 +57,7 @@ There are two types of integration tests:
 
 ## End-to-End tests
 
-The end-to-end tests are managed by Cypress. They are in `cypress\e2e\tests.cy.js` and can be run with the command `npm run test`.
+The end-to-end tests are managed by Cypress. They are in `cypress\e2e\tests.cy.js`.
 
 ## Tools
 Database: MariaDB
