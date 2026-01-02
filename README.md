@@ -60,8 +60,8 @@ There are two types of integration tests:
 The end-to-end tests are managed by Cypress. They are in `cypress\e2e\tests.cy.js`.
 
 ## Tools
-Database: MariaDB
-Programming: Flask / Python / JavaScript / CSS3 / HTML5
+Database: MariaDB  
+Programming: Flask / Python / JavaScript / CSS3 / HTML5  
 Testing: Pytest / GitHub Actions / Cypress
 
 ## Author
